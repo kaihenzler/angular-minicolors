@@ -3,13 +3,30 @@ angular-minicolors
 
 ## General
 
-My first try of wrtiting a wrapper-directive around JQuery MiniColors by [Cory LaViska ](https://github.com/claviska) (https://github.com/claviska/jquery-minicolors)
+My first try of wrtiting a wrapper-directive around JQuery MiniColors by [Cory LaViska ](https://github.com/claviska) [https://github.com/claviska/jquery-minicolors](https://github.com/claviska/jquery-minicolors)
+
+Works with Bootstrap 3 and works fine with mobile browsers such as Safari on iPad.
 
 ## How To Install
 
+1. Install by typing `bower install angular-minicolors` consider using the `--save` option to save the dependency to your own bower.json file
+
 ## How To Use
 
-## Found a Issue?
+1. Include the JQuery MiniColors Files from the bower_components folder (bower_components/jquery-minicolors/) in your project.
+The files you need are: `jquery-minicolors.js` `jquery-minicolors.css` and `jquery-minicolors.png` and of course JQuery itself
+
+2. Add the dependency to your app definition `angular.module('myApp', ['minicolors'])`
+
+3. Append `minicolors` attribute to any input-field. If you want to pass in a settings object, do it like this: `minicolors="MySettingsObject"`
+
+angular-minicolors is planned to be API compatible with: [http://labs.abeautifulsite.net/jquery-minicolors/](http://labs.abeautifulsite.net/jquery-minicolors/)
+
+keep in mind, that this is my first public angular-directive and it is by far not finished.
+
+## Found an issue?
+
+Please report the issue and feel free to submit a pull request
 
 ## Copyright and license
 
