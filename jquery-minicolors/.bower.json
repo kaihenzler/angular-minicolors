@@ -1,0 +1,30 @@
+{
+  "name": "jquery-minicolors",
+  "version": "2.1.1",
+  "description": "jQuery MiniColors Plugin",
+  "homepage": "https://github.com/claviska/jquery-minicolors",
+  "main": [
+    "./jquery.minicolors.js",
+    "./jquery.minicolors.css"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.7.x"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Cory LaViska",
+    "web": "http://www.abeautifulsite.net/"
+  },
+  "license": [
+    "http://www.opensource.org/licenses/mit-license.php"
+  ],
+  "_release": "2.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.1",
+    "commit": "d8708ae5fd949ec76903b9266eae07ef0a69f733"
+  },
+  "_source": "git://github.com/claviska/jquery-minicolors.git",
+  "_target": "~2.1.1",
+  "_originalSource": "jquery-minicolors"
+}
