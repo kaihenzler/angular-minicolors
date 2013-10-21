@@ -20,24 +20,6 @@ angular.module('minicolors', [])
         }
         var settings = getSettings();
 
-        // var defaultSettings = {
-        //   theme: 'bootstrap',
-        //   position: 'top left',
-        //   control: 'wheel'
-        // };
-
-        //if a model exists, hook up the ngModel
-        if (ngModel) {
-          var updateModel = function () {
-            if(!scope.$$phase) {
-              //not currently in $digest or $apply
-              scope.$apply(function () {
-                var color = element.minicolors('value');
-                ngModel.$setViewValue(color);
-              });
-            }
-          };
-        }
         //initialize the starting value, if there is one
         ngModel.$render = function () {
           if(!scope.$$phase) {
