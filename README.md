@@ -7,7 +7,7 @@ My first try of wrtiting a wrapper-directive around JQuery MiniColors by [Cory L
 
 Works with Bootstrap 3 and works fine with mobile browsers such as Safari on iPad.
 
-##[DEMO and API](kaihenzler.github.io/angular-minicolors)
+##[DEMO and API](https://kaihenzler.github.io/angular-minicolors)
 
 ## How To Install
 
