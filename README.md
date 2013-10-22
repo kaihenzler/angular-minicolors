@@ -7,6 +7,8 @@ My first try of wrtiting a wrapper-directive around JQuery MiniColors by [Cory L
 
 Works with Bootstrap 3 and works fine with mobile browsers such as Safari on iPad.
 
+##[DEMO and API](kaihenzler.github.io/angular-minicolors)
+
 ## How To Install
 
 1. Install by typing `bower install angular-minicolors` consider using the `--save` option to save the dependency to your own bower.json file
@@ -23,6 +25,10 @@ The files you need are: `jquery-minicolors.js` `jquery-minicolors.css` and `jque
 angular-minicolors is planned to be API compatible with: [http://labs.abeautifulsite.net/jquery-minicolors/](http://labs.abeautifulsite.net/jquery-minicolors/)
 
 keep in mind, that this is my first public angular-directive and it is by far not finished.
+
+## TODO
+
+- wrap the original events in angular events
 
 ## Found an issue?
 
