@@ -67,6 +67,136 @@
       </div>
     </div>
 
+    <!-- Input modes -->
+    <h3>Input Modes:</h3>
+    <div class="well">
+      <div class="row">
+        <div class="col-lg-4 col-sm-4 col-12">
+          <label for="text-field">Text field (default): {{color.textfield}}</label>
+          <div class="form-group">
+            <input
+              minicolors="defaultsettings"
+              id="text-field"
+              class="form-control"
+              type="text"
+              ng-model="color.textfield">
+          </div>
+          <label for="hidden-input">Hidden Input: {{color.hidden}}</label>
+          <div class="form-group">
+            <input
+              minicolors="defaultsettings"
+              id="hidden-input"
+              type="hidden"
+              ng-model="color.hidden">
+          </div>
+          <span class="help-block">
+            [doesn't work with initial value yet]
+          </span>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-12">
+          <label for="inline">Inline: {{color.inline}}</label><br>
+          <div class="form-group">
+            <input
+                minicolors="inlinesettings"
+                id="inline"
+                class="form-control"
+                type="text"
+                ng-model="color.inline">
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Positions -->
+      <h3>Positions:</h3>
+      <div class="well">
+        <p>
+          Valid positions include <code>bottom left</code>, <code>bottom right</code>, <code>top
+          left</code>, and <code>top right</code>.
+        </p>
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label for="position-bottom-left">bottom left (default): {{color.bottomleft}}</label>
+            <div class="form-group">
+            <input
+              minicolors="defaultsettings"
+              id="position-bottom-left"
+              class="form-control"
+              type="text"
+              ng-model="color.bottomleft">
+            </div>
+            <label for="position-top-left">top left: {{color.topleft}}</label>
+            <div class="form-group">
+              <input
+                minicolors="topleftsettings"
+                id="position-top-left"
+                class="form-control"
+                type="text"
+                ng-model="color.topleft">
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label for="position-bottom-right">bottom right: {{color.bottomright}}</label>
+            <div class="form-group">
+              <input
+                minicolors="bottomrightsettings"
+                id="position-bottom-right"
+                class="form-control"
+                type="text"
+                ng-model="color.bottomright">
+            </div>
+            <label for="position-top-right">top right: {{color.topright}}</label>
+            <div class="form-group">
+              <input
+                minicolors="toprightsettings"
+                id="position-top-right"
+                class="form-control"
+                type="text"
+                ng-model="color.topright">
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-12">
+          </div>
+        </div>
+      </div>
+
+      <!-- and more -->
+      <h3>&hellip;and more!</h3>
+      <div class="well">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label for="opacity">Opacity: {{color.opacity}}</label>
+            <div class="form-group">
+              <input
+                minicolors="opacitysettings"
+                id="opacity"
+                class="form-control"
+                type="text"
+                ng-model="color.opacity">
+            </div>
+              <span class="help-block">
+                Opacity can be assigned by setting the <code>opacity</code> option to <code>true</code>.
+              </span>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label for="letter-case">Letter Case: {{color.lettercase}}</label>
+            <div class="form-group">
+              <input
+                  minicolors="lettercasesettings"
+                  id="letter-case"
+                  class="form-control"
+                  type="text"
+                  ng-model="color.lettercase">
+            </div>
+              <span class="help-block">
+                This field will always be uppercase.
+              </span>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
     <!--
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -86,29 +216,60 @@
           hue: '#00AA00',
           brightness: '#FFFFFF',
           saturation: '#AAAAAA',
-          wheel: '#336688'
+          wheel: '#336688',
+          textfield: '#BBBBBB',
+          hidden: '#121212',
+          inline: '#555555',
+          topleft: '#444444',
+          topright: '#777777',
+          bottomleft: '#888888',
+          bottomright: '#191919',
+          opacity: '#aabbaa',
+          lettercase: '#EEEEAA'
         };
-        $scope.huesettings = {
+        $scope.defaultsettings = {
           control: 'hue',
-          position: 'top left',
+          position: 'bottom left',
           theme: 'bootstrap'
-        };
-        $scope.brightnesssettings = {
-          control: 'brightness',
-          position: 'top left',
-          theme: 'bootstrap'
-        };
-        $scope.saturationsettings = {
-          control: 'saturation',
-          position: 'top left',
-          theme: 'bootstrap'
-        };
-        $scope.wheelsettings = {
-          control: 'wheel',
-          position: 'top left',
-          theme: 'bootstrap'
-        };
+        }
+        //Objects for control types:
+        //object for hue
+        $scope.huesettings = angular.copy($scope.defaultsettings);
 
+        //object for brightness
+        $scope.brightnesssettings = angular.copy($scope.defaultsettings);
+        $scope.brightnesssettings.control = 'brightness';
+
+        //object for saturation
+        $scope.saturationsettings = angular.copy($scope.defaultsettings);
+        $scope.saturationsettings.control = 'saturation';
+
+        //object for wheel
+        $scope.wheelsettings = angular.copy($scope.defaultsettings);
+        $scope.wheelsettings.control = 'wheel';
+
+
+        //objects for input modes
+        //hidden textfield
+        $scope.inlinesettings = angular.copy($scope.defaultsettings);
+        $scope.inlinesettings.inline = true;
+
+        //positions
+        $scope.topleftsettings = angular.copy($scope.defaultsettings);
+        $scope.topleftsettings.position = 'top left';
+
+        $scope.toprightsettings = angular.copy($scope.defaultsettings);
+        $scope.toprightsettings.position = 'top right';
+
+        $scope.bottomrightsettings = angular.copy($scope.defaultsettings);
+        $scope.bottomrightsettings.position = 'bottom right';
+
+        //and more
+        $scope.opacitysettings = angular.copy($scope.defaultsettings);
+        $scope.opacitysettings.opacity = true;
+
+        $scope.lettercasesettings = angular.copy($scope.defaultsettings);
+        $scope.lettercasesettings.letterCase = 'uppercase';
       });
     </script>
   </body>
