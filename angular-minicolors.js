@@ -10,7 +10,11 @@ angular.module('minicolors', [])
 
       //gets the settings object
       var getSettings = function () {
-        return angular.extend({}, scope.$eval(attrs.minicolors));
+        var defaultSettings = {
+          theme: 'bootstrap',
+          position: 'top left'
+        };
+        return angular.extend(defaultSettings, scope.$eval(attrs.minicolors));
       };
 
       //init method
@@ -40,9 +44,13 @@ angular.module('minicolors', [])
         // Force a render to override whatever is in the input text box
         ngModel.$render();
       };
+      initMinicolors();
 
       // Watch for changes to the directives options and then call init method again
       scope.$watch(getSettings, initMinicolors, true);
+      scope.$watch(attrs.ngModel, function(newValue) {
+        element.minicolors('value', newValue);
+      });
     }
   };
 });
