@@ -16,6 +16,7 @@
     <h3>by <a href="https://github.com/kaihenzler">Kai Henzler</a></h3>
     <p><br/>Make sure to check out <a href="http://angularjs.org">AngularJS</a></p>
     <p>Works with Bootstrap 3 and also on mobile devices like iPad and iPhone</p>
+    <p>gh-pages inspired by <a href="http://labs.abeautifulsite.net/jquery-minicolors/">JQeury MiniColors</a></p>
     <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=kaihenzler&amp;repo=angular-minicolors&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
     <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=kaihenzler&amp;repo=angular-minicolors&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe>
     <a href="https://github.com/kaihenzler/angular-minicolors"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -197,6 +198,35 @@
         </div>
       </div>
 
+
+      <!-- and more -->
+      <h3>Working with Angular form-validation</h3>
+      <span class="help-block">
+        Use like any other input with <a href="http://docs.angularjs.org/guide/forms">Angular form-validation</a>.
+      </span>
+      <form name="form1">
+        <div class="well">
+          <div class="row">
+            <div class="col-lg-4 col-sm-4 col-12">
+              <label for="opacity">Opacity: {{color.formvalidation}}</label>
+              <div class="form-group">
+                <input
+                  minicolors="topleftsettings"
+                  name="formvalidation"
+                  class="form-control"
+                  type="text"
+                  ng-model="color.formvalidation"
+                  required>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-12">
+              <p>Form valid: {{form1.$valid}}</p>
+              <button type="submit" class="btn btn-primary" ng-disabled="form1.$invalid">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
   </div>
 
     <!--
@@ -228,6 +258,7 @@
           bottomright: '#191919',
           opacity: '#aabbaa',
           lettercase: '#EEEEAA'
+          // formvalidation: '#EEEEAA'
         };
         $scope.defaultsettings = {
           control: 'hue',
