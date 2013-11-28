@@ -49,7 +49,11 @@ angular.module('minicolors', [])
       // Watch for changes to the directives options and then call init method again
       scope.$watch(getSettings, initMinicolors, true);
       scope.$watch(attrs.ngModel, function(newValue) {
-        element.minicolors('value', newValue);
+        if(!scope.$$phase) {
+          scope.$apply(function () {
+            element.minicolors('value', newValue);
+          });
+        }
       });
     }
   };
