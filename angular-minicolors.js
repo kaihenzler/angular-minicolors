@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('minicolors', [])
-.directive('minicolors', function () {
+.directive('minicolors', function ($parse) {
   return {
     require: '?ngModel',
     restrict: 'A',
     link: function(scope, element, attrs, ngModel) {
       //source: https://github.com/SimpleApp/angular-colorpicker/blob/master/app/js/directives.js
-
+      //parse it once so we don't parse it on every watch...
+      var settingsGetter = $parse(attrs.minicolors);
       //gets the settings object
       var getSettings = function () {
         var defaultSettings = {
           theme: 'bootstrap',
           position: 'top left'
         };
-        return angular.extend(defaultSettings, scope.$eval(attrs.minicolors));
+        return angular.extend(defaultSettings, settingsGetter(scope));
       };
 
       //init method
