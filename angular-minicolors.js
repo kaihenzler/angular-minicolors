@@ -22,7 +22,6 @@ angular.module('minicolors').provider('minicolors', function () {
   };
 
   this.$get = function() {
-    // var defaults = this.defaults;
     return this;
   };
 
