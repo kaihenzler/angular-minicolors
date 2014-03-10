@@ -26,9 +26,47 @@ angular-minicolors is planned to be API compatible with: [http://labs.abeautiful
 
 keep in mind, that this is my first public angular-directive and it is by far not finished.
 
+## default config
+
+the default config is as follows:
+
+```js
+  theme: 'bootstrap',
+  position: 'top left',
+  defaultValue: '',
+  animationSpeed: 50,
+  animationEasing: 'swing',
+  change: null,
+  changeDelay: 0,
+  control: 'hue',
+  hide: null,
+  hideSpeed: 100,
+  inline: false,
+  letterCase: 'lowercase',
+  opacity: false,
+  show: null,
+  showSpeed: 100
+```
+
+
+## app-wide config
+
+a Provider is now exposed and you can edit the global config like this:
+
+```js
+angular.module('my-app').config(function (minicolorsProvider) {
+  angular.extend(minicolorsProvider.defaults, {
+    control: 'hue',
+    position: 'top left'
+  });
+});
+```
+
 ## TODO
 
 - wrap the original events in angular events
+- investigate why input="hidden" doesn't work
+- add protection against false color values
 
 ## Found an issue?
 
