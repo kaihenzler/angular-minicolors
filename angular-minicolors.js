@@ -27,7 +27,7 @@ angular.module('minicolors').provider('minicolors', function () {
 
 });
 
-angular.module('minicolors').directive('minicolors', function (minicolors, $timeout) {
+angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function (minicolors, $timeout) {
   return {
     require: '?ngModel',
     restrict: 'A',
@@ -94,4 +94,4 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
       scope.$watch(getSettings, initMinicolors, true);
     }
   };
-});
+}]);
