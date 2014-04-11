@@ -14,7 +14,7 @@
     "color",
     "picker"
   ],
-  "main": "dist/angular-minicolors.js",
+  "main": "angular-minicolors.js",
   "dependencies": {
     "jquery-minicolors": "~2.1.1"
   },
