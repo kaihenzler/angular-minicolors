@@ -27,7 +27,7 @@ angular.module('minicolors').provider('minicolors', function () {
 
 });
 
-angular.module('minicolors').directive('minicolors', function (minicolors, $timeout) {
+angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function (minicolors, $timeout) {
   return {
     require: '?ngModel',
     restrict: 'A',
@@ -44,20 +44,12 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
 
       //what to do if the value changed
       ngModel.$render = function () {
-        //we are already initialized
-        if(!scope.$$phase) {
-          //not currently in $digest or $apply
-          scope.$apply(function () {
-            var color = ngModel.$viewValue;
-            element.minicolors('value', color);
-          });
-        } else {
-          //we are in digest or apply, and therefore call a timeout function
-          $timeout(function() {
-            var color = ngModel.$viewValue;
-            element.minicolors('value', color);
-          }, 0);
-        }
+
+        //we are in digest or apply, and therefore call a timeout function
+        $timeout(function() {
+          var color = ngModel.$viewValue;
+          element.minicolors('value', color);
+        }, 0, false);
       };
 
       //init method
@@ -67,6 +59,11 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
           return;
         }
         var settings = getSettings();
+        settings.change = function (hex) {
+          scope.$apply(function () {
+            ngModel.$setViewValue(hex);
+          });
+        };
 
         // If we don't destroy the old one it doesn't update properly when the config changes
         element.minicolors('destroy');
@@ -94,4 +91,4 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
       scope.$watch(getSettings, initMinicolors, true);
     }
   };
-});
+}]);
