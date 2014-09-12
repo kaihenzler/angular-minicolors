@@ -59,6 +59,11 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
           return;
         }
         var settings = getSettings();
+        settings.change = function (hex) {
+          scope.$apply(function () {
+            ngModel.$setViewValue(hex);
+          });
+        };
 
         // If we don't destroy the old one it doesn't update properly when the config changes
         element.minicolors('destroy');
