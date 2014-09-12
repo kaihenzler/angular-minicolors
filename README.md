@@ -65,7 +65,6 @@ angular.module('my-app').config(function (minicolorsProvider) {
 ## TODO
 
 - wrap the original events in angular events
-- investigate why input="hidden" doesn't work
 - add protection against false color values
 
 ## Found an issue?
