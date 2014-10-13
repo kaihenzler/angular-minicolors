@@ -21,14 +21,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "_release": "2.1.7",
-  "_resolution": {
-    "type": "version",
-    "tag": "2.1.7",
-    "commit": "98c7e9943a98fb61ea6afdf0d88dd63c35dd362d"
-  },
-  "_source": "git://github.com/claviska/jquery-minicolors.git",
-  "_target": "2.1.7",
-  "_originalSource": "jquery-minicolors"
+  ]
 }
