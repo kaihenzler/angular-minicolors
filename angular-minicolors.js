@@ -65,8 +65,10 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
           });
         };
 
-        // If we don't destroy the old one it doesn't update properly when the config changes
-        element.minicolors('destroy');
+        //destroy the old colorpicker if one already exists
+        if(element.hasClass('minicolors')) {
+          element.minicolors('destroy');
+        }
 
         // Create the new minicolors widget
         element.minicolors(settings);
