@@ -27,7 +27,7 @@ angular.module('minicolors').provider('minicolors', function () {
 
 });
 
-angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function (minicolors, $timeout) {
+angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', '$parse', function (minicolors, $timeout, $parse) {
   return {
     require: '?ngModel',
     restrict: 'A',
@@ -48,7 +48,9 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
         //we are in digest or apply, and therefore call a timeout function
         $timeout(function() {
           var color = ngModel.$viewValue;
+          var opacity = scope.$eval(attrs.ngOpacity) || "1.0";
           element.minicolors('value', color);
+          element.minicolors('opacity', opacity);
         }, 0, false);
       };
 
@@ -59,9 +61,16 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
           return;
         }
         var settings = getSettings();
-        settings.change = function (hex) {
+        settings.change = function (hex, opacity) {
           scope.$apply(function () {
             ngModel.$setViewValue(hex);
+            if (attrs.ngRgba) {
+              var rgba = element.minicolors('rgbaString');
+              $parse(attrs.ngRgba).assign(scope, rgba);
+            }
+            if (attrs.ngOpacity) {
+              $parse(attrs.ngOpacity).assign(scope, opacity);
+            }
           });
         };
 
