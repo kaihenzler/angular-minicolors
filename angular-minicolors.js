@@ -27,7 +27,7 @@ angular.module('minicolors').provider('minicolors', function () {
 
 });
 
-angular.module('minicolors').directive('minicolors', function (minicolors, $timeout) {
+angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', '$parse', function (minicolors, $timeout, $parse) {
   return {
     require: '?ngModel',
     restrict: 'A',
@@ -44,20 +44,14 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
 
       //what to do if the value changed
       ngModel.$render = function () {
-        //we are already initialized
-        if(!scope.$$phase) {
-          //not currently in $digest or $apply
-          scope.$apply(function () {
-            var color = ngModel.$viewValue;
-            element.minicolors('value', color);
-          });
-        } else {
-          //we are in digest or apply, and therefore call a timeout function
-          $timeout(function() {
-            var color = ngModel.$viewValue;
-            element.minicolors('value', color);
-          }, 0);
-        }
+
+        //we are in digest or apply, and therefore call a timeout function
+        $timeout(function() {
+          var color = ngModel.$viewValue;
+          var opacity = scope.$eval(attrs.minicolorsOpacity) || '1.0';
+          element.minicolors('value', color);
+          element.minicolors('opacity', opacity);
+        }, 0, false);
       };
 
       //init method
@@ -67,9 +61,23 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
           return;
         }
         var settings = getSettings();
+        settings.change = function (hex, opacity) {
+          scope.$apply(function () {
+            ngModel.$setViewValue(hex);
+            if (attrs.minicolorsRgba) {
+              var rgba = element.minicolors('rgbaString');
+              $parse(attrs.minicolorsRgba).assign(scope, rgba);
+            }
+            if (attrs.minicolorsOpacity) {
+              $parse(attrs.minicolorsOpacity).assign(scope, opacity);
+            }
+          });
+        };
 
-        // If we don't destroy the old one it doesn't update properly when the config changes
-        element.minicolors('destroy');
+        //destroy the old colorpicker if one already exists
+        if(element.hasClass('minicolors')) {
+          element.minicolors('destroy');
+        }
 
         // Create the new minicolors widget
         element.minicolors(settings);
@@ -94,4 +102,4 @@ angular.module('minicolors').directive('minicolors', function (minicolors, $time
       scope.$watch(getSettings, initMinicolors, true);
     }
   };
-});
+}]);
