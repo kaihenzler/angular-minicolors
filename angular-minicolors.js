@@ -39,7 +39,7 @@
 
   });
 
-  angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function(minicolors, $timeout) {
+  angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', '$parse', function(minicolors, $timeout, $parse) {
     return {
       require: '?ngModel',
       restrict: 'A',
@@ -60,7 +60,9 @@
           //we are in digest or apply, and therefore call a timeout function
           $timeout(function() {
             var color = ngModel.$viewValue;
+            var opacity = scope.$eval(attrs.minicolorsOpacity) || '1.0';
             element.minicolors('value', color);
+            element.minicolors('opacity', opacity);
           }, 0, false);
         };
 
@@ -71,14 +73,21 @@
             return;
           }
           var settings = getSettings();
-          settings.change = function(hex) {
+          settings.change = function(hex, opacity) {
             scope.$apply(function() {
               ngModel.$setViewValue(hex);
+              if (attrs.minicolorsRgba) {
+                var rgba = element.minicolors('rgbaString');
+                $parse(attrs.minicolorsRgba).assign(scope, rgba);
+              }
+              if (attrs.minicolorsOpacity) {
+                $parse(attrs.minicolorsOpacity).assign(scope, opacity);
+              }
             });
           };
 
           //destroy the old colorpicker if one already exists
-          if (element.hasClass('minicolors-input')) {
+          if (element.hasClass('minicolors')) {
             element.minicolors('destroy');
           }
 
