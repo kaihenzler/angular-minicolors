@@ -164,14 +164,16 @@
       <div class="well">
         <div class="row">
           <div class="col-lg-4 col-sm-4 col-12">
-            <label for="opacity">Opacity: {{color.opacity}}</label>
+            <label for="opacity">Opacity: {{color.opacityRgba}}</label>
             <div class="form-group">
               <input
                 minicolors="opacitysettings"
                 id="opacity"
                 class="form-control"
                 type="text"
-                ng-model="color.opacity">
+                minicolors-rgba="color.opacityRgba"
+                minicolors-opacity="color.opacityVal"
+                ng-model="color.opacityHex">
             </div>
               <span class="help-block">
                 Opacity can be assigned by setting the <code>opacity</code> option to <code>true</code>.
@@ -243,6 +245,37 @@
         </div>
       </div>
 
+      <h3>Dynamic Config</h3>
+      <div class="well">
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label for="random">Dynamic Settings: {{color.dynamic}}</label>
+            <div class="form-group">
+              <input
+                minicolors="dynamicSettings"
+                id="dynamic"
+                class="form-control"
+                type="text"
+                ng-model="color.dynamic">
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label class="control-label">Lettercase</label>
+            <select class="form-control" ng-model="letterCase" ng-change="changeLetterCase(letterCase)">
+              <option value="uppercase">Upper Case</option>
+              <option value="lowerrcase">Lower Case</option>
+            </select>
+          </div>
+          <div class="col-lg-4 col-sm-4 col-12">
+            <label class="control-label">Position</label>
+            <select class="form-control" ng-model="pos" ng-change="changePosition(pos)">
+              <option value="top left">Top Left</option>
+              <option value="top right">Top Right</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
 
   </div>
 
@@ -282,9 +315,12 @@
           topright: '#777777',
           bottomleft: '#888888',
           bottomright: '#191919',
-          opacity: '#aabbaa',
+          opacityHex: '#aabbaa',
+          opacityVal: '1',
+          opacityRgba: 'rgba(0,0,0,0.5)',
           lettercase: '#EEEEAA',
-          random: '#000000'
+          random: '#000000',
+          dynamic: '#CCCCCC'
           // formvalidation: '#EEEEAA'
         };
         //Objects for control types:
@@ -331,6 +367,18 @@
 
         $scope.lettercasesettings = {
           letterCase: 'uppercase'
+        };
+
+        $scope.dynamicSettings = {
+          letterCase: 'uppercase'
+        };
+
+        $scope.changeLetterCase = function (letterCase) {
+          $scope.dynamicSettings.letterCase = letterCase;
+        };
+
+        $scope.changePosition = function (pos) {
+          $scope.dynamicSettings.position = pos;
         };
 
         $scope.randomColor = function () {
