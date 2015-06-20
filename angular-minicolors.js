@@ -66,7 +66,7 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
         };
 
         //destroy the old colorpicker if one already exists
-        if(element.hasClass('minicolors')) {
+        if(element.hasClass('minicolors-input')) {
           element.minicolors('destroy');
         }
 
