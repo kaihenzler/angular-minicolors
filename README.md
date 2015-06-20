@@ -20,7 +20,29 @@ The files you need are: `jquery-minicolors.js` `jquery-minicolors.css` and `jque
 
 2. Add the dependency to your app definition `angular.module('myApp', ['minicolors'])`
 
-3. Append `minicolors` attribute to any input-field. If you want to pass in a settings object, do it like this: `minicolors="MySettingsObject"`
+3. Append `minicolors` attribute to any input-field. If you want to pass in a settings object, do it like this: `minicolors="MySettingsObject"`. Below you can see a usage example with bootstrap classes. The directive should be wrapped inside a div to preserve correct styling.
+
+```html
+<div class="form-group">
+  <label for="color-input" class="form-control">Color:</label>
+  <input
+    minicolors="customSettings"
+    id="color-input"
+    class="form-control"
+    type="text"
+    ng-model="input.color">
+</div>
+
+<script type="text/javascript">
+  //using for example these settings inside your controller
+  $scope.customSettings = {
+    control: 'brightness',
+    theme: 'bootstrap',
+    position: 'top left'
+  };
+
+</script>
+```
 
 angular-minicolors is planned to be API compatible with: [http://labs.abeautifulsite.net/jquery-minicolors/](http://labs.abeautifulsite.net/jquery-minicolors/)
 
