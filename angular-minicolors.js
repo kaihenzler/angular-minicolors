@@ -43,14 +43,12 @@ angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', 
       };
 
       //what to do if the value changed
-      ngModel.$render = function () {
-
+      scope.$watch(function () { return ngModel.$viewValue; }, function (newValue) {
         //we are in digest or apply, and therefore call a timeout function
         $timeout(function() {
-          var color = ngModel.$viewValue;
-          element.minicolors('value', color);
+          element.minicolors('value', newValue);
         }, 0, false);
-      };
+      });
 
       //init method
       var initMinicolors = function () {
