@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/kaihenzler/angular-minicolors/issues"
   },
-  "homepage": "https://github.com/kaihenzler/angular-minicolors#readme"
+  "homepage": "https://github.com/kaihenzler/angular-minicolors#readme",
+  "dependencies": {
+    "jquery-minicolors": "^2.1.10"
+  }
 }
