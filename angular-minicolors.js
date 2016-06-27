@@ -1,5 +1,7 @@
 'use strict';
 
+module.exports = 'minicolors';
+
 angular.module('minicolors', []);
 
 angular.module('minicolors').provider('minicolors', function () {
