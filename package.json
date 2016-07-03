@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/kaihenzler/angular-minicolors#readme",
   "dependencies": {
-    "jquery-minicolors": "^2.1.10"
+    "jquery-minicolors": "^2.1.10",
+    "angular": "^1.4.0"
   }
 }
