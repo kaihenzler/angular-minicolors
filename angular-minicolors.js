@@ -8,7 +8,7 @@
     module.exports = factory(require('angular'), require('jquery-minicolors'));
     module.exports = 'minicolors';
   } else {
-    root.angularMinicolors = factory(root.angular, root['jquery-minicolors']);
+    root.angularMinicolors = factory(root.angular, root.jqueryMinicolors);
   }
 })(this, function(angular) {
 
