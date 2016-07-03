@@ -1,98 +1,109 @@
+'format cjs';
 'use strict';
 
-module.exports = 'minicolors';
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['angular', 'jquery-minicolors'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('angular'), require('jquery-minicolors'));
+    module.exports = 'minicolors';
+  } else {
+    root.angularMinicolors = factory(root.angular, root['jquery-minicolors']);
+  }
+})(this, function(angular) {
 
-angular.module('minicolors', []);
+  angular.module('minicolors', []);
 
-angular.module('minicolors').provider('minicolors', function () {
-  this.defaults = {
-    theme: 'bootstrap',
-    position: 'top left',
-    defaultValue: '',
-    animationSpeed: 50,
-    animationEasing: 'swing',
-    change: null,
-    changeDelay: 0,
-    control: 'hue',
-    hide: null,
-    hideSpeed: 100,
-    inline: false,
-    letterCase: 'lowercase',
-    opacity: false,
-    show: null,
-    showSpeed: 100
-  };
+  angular.module('minicolors').provider('minicolors', function() {
+    this.defaults = {
+      theme: 'bootstrap',
+      position: 'top left',
+      defaultValue: '',
+      animationSpeed: 50,
+      animationEasing: 'swing',
+      change: null,
+      changeDelay: 0,
+      control: 'hue',
+      hide: null,
+      hideSpeed: 100,
+      inline: false,
+      letterCase: 'lowercase',
+      opacity: false,
+      show: null,
+      showSpeed: 100
+    };
 
-  this.$get = function() {
-    return this;
-  };
+    this.$get = function() {
+      return this;
+    };
 
-});
+  });
 
-angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function (minicolors, $timeout) {
-  return {
-    require: '?ngModel',
-    restrict: 'A',
-    priority: 1, //since we bind on an input element, we have to set a higher priority than angular-default input
-    link: function(scope, element, attrs, ngModel) {
+  angular.module('minicolors').directive('minicolors', ['minicolors', '$timeout', function(minicolors, $timeout) {
+    return {
+      require: '?ngModel',
+      restrict: 'A',
+      priority: 1, //since we bind on an input element, we have to set a higher priority than angular-default input
+      link: function(scope, element, attrs, ngModel) {
 
-      var inititalized = false;
+        var inititalized = false;
 
-      //gets the settings object
-      var getSettings = function () {
-        var config = angular.extend({}, minicolors.defaults, scope.$eval(attrs.minicolors));
-        return config;
-      };
-
-      //what to do if the value changed
-      ngModel.$render = function () {
-
-        //we are in digest or apply, and therefore call a timeout function
-        $timeout(function() {
-          var color = ngModel.$viewValue;
-          element.minicolors('value', color);
-        }, 0, false);
-      };
-
-      //init method
-      var initMinicolors = function () {
-
-        if(!ngModel) {
-          return;
-        }
-        var settings = getSettings();
-        settings.change = function (hex) {
-          scope.$apply(function () {
-            ngModel.$setViewValue(hex);
-          });
+        //gets the settings object
+        var getSettings = function() {
+          var config = angular.extend({}, minicolors.defaults, scope.$eval(attrs.minicolors));
+          return config;
         };
 
-        //destroy the old colorpicker if one already exists
-        if(element.hasClass('minicolors-input')) {
-          element.minicolors('destroy');
-        }
+        //what to do if the value changed
+        ngModel.$render = function() {
 
-        // Create the new minicolors widget
-        element.minicolors(settings);
-
-        // are we inititalized yet ?
-        //needs to be wrapped in $timeout, to prevent $apply / $digest errors
-        //$scope.$apply will be called by $timeout, so we don't have to handle that case
-        if (!inititalized) {
+          //we are in digest or apply, and therefore call a timeout function
           $timeout(function() {
             var color = ngModel.$viewValue;
             element.minicolors('value', color);
-          }, 0);
-          inititalized = true;
-          return;
-        }
-      };
+          }, 0, false);
+        };
 
-      initMinicolors();
-      //initital call
+        //init method
+        var initMinicolors = function() {
 
-      // Watch for changes to the directives options and then call init method again
-      scope.$watch(getSettings, initMinicolors, true);
-    }
-  };
-}]);
+          if (!ngModel) {
+            return;
+          }
+          var settings = getSettings();
+          settings.change = function(hex) {
+            scope.$apply(function() {
+              ngModel.$setViewValue(hex);
+            });
+          };
+
+          //destroy the old colorpicker if one already exists
+          if (element.hasClass('minicolors-input')) {
+            element.minicolors('destroy');
+          }
+
+          // Create the new minicolors widget
+          element.minicolors(settings);
+
+          // are we inititalized yet ?
+          //needs to be wrapped in $timeout, to prevent $apply / $digest errors
+          //$scope.$apply will be called by $timeout, so we don't have to handle that case
+          if (!inititalized) {
+            $timeout(function() {
+              var color = ngModel.$viewValue;
+              element.minicolors('value', color);
+            }, 0);
+            inititalized = true;
+            return;
+          }
+        };
+
+        initMinicolors();
+        //initital call
+
+        // Watch for changes to the directives options and then call init method again
+        scope.$watch(getSettings, initMinicolors, true);
+      }
+    };
+  }]);
+});
