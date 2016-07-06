@@ -24,7 +24,7 @@
     "url": "https://github.com/kaihenzler/angular-minicolors/issues"
   },
   "homepage": "https://github.com/kaihenzler/angular-minicolors#readme",
-  "dependencies": {
+  "peerDependencies": {
     "jquery-minicolors": "^2.1.10",
     "angular": "^1.4.0"
   }
