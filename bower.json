@@ -1,6 +1,6 @@
 {
   "name": "angular-minicolors",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "homepage": "https://github.com/kaihenzler/angular-minicolors",
   "authors": [
     "Kai Henzler <kai.henzler@gmx.de>"
@@ -8,12 +8,15 @@
   "description": "A wrapper around JQuery MiniColors by Cory LaViska",
   "keywords": [
     "angular",
+    "minicolors",
     "colorpicker",
-    "minicolors"
+    "color-picker",
+    "color",
+    "picker"
   ],
-  "main": "dist/angular-minicolors.js",
+  "main": "angular-minicolors.js",
   "dependencies": {
-    "jquery-minicolors": "~2.1.1"
+    "jquery-minicolors": "2.1.7"
   },
   "license": "MIT",
   "ignore": [
