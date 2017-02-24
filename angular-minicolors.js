@@ -101,7 +101,7 @@
             return;
           }
 
-          function onBlur (e) {
+          function onBlur(e) {
             scope.$apply(function() {
                 var color = element.minicolors('value');
                 ngModel.$setViewValue(color);
