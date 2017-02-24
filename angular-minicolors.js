@@ -80,10 +80,14 @@
           //destroy the old colorpicker if one already exists
           if (element.hasClass('minicolors-input')) {
             element.minicolors('destroy');
+            element.off('blur', onBlur);
           }
 
           // Create the new minicolors widget
           element.minicolors(settings);
+
+          // hook up into the jquery-minicolors onBlur event.
+          element.on('blur', onBlur);
 
           // are we inititalized yet ?
           //needs to be wrapped in $timeout, to prevent $apply / $digest errors
@@ -95,6 +99,13 @@
             }, 0);
             inititalized = true;
             return;
+          }
+
+          function onBlur(e) {
+            scope.$apply(function() {
+                var color = element.minicolors('value');
+                ngModel.$setViewValue(color);
+            });              
           }
         };
 
